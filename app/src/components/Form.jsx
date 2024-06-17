@@ -51,11 +51,17 @@ export default function Form({ getUsers, onEdit, setOnEdit }) {
       if (onEdit) {
          const user = ref.current
 
-         user.nome.value = onEdit.nome
-         user.email.value = onEdit.email
-         user.telefone.value = onEdit.telefone
-         user.cpf.value = onEdit.cpf
-         user.data_nascimento.value = onEdit.data_nascimento
+         ;(user.cpf.value = onEdit.cpf),
+            (user.nome.value = onEdit.nome),
+            (user.aniversario.value = onEdit.aniversario),
+            (user.telefone.value = onEdit.telefone),
+            (user.email.value = onEdit.email),
+            (user.genero.value = onEdit.genero),
+            (user.rg.value = onEdit.rg),
+            (user.cep.value = onEdit.cep),
+            (user.endereco.value = onEdit.endereco),
+            (user.numero_endereco.value = onEdit.numero_endereco),
+            (user.complemento.value = onEdit.complemento)
       }
    }, [onEdit])
 
@@ -65,42 +71,55 @@ export default function Form({ getUsers, onEdit, setOnEdit }) {
       const user = ref.current
 
       if (
-         !user.nome.value ||
-         !user.email.value ||
-         !user.telefone.value ||
          !user.cpf.value ||
-         !user.data_nascimento.value
+         !user.nome.value ||
+         !user.aniversario.value ||
+         !user.telefone.value ||
+         !user.email.value ||
+         !user.genero.value ||
+         !user.rg.value ||
+         !user.cep.value ||
+         !user.endereco.value ||
+         !user.numero_endereco.value ||
+         !user.complemento.value
       )
          return toast.warn('preencha todos os campos!')
 
       if (onEdit) {
          await axios
-            .put('http://localhost:8800/' + onEdit.id, {
-               nome: user.nome.value,
-               email: user.email.value,
-               telefone: user.telefone.value,
+            .put('http://localhost:8800/' + onEdit.cpf, {
                cpf: user.cpf.value,
-               data_nascimento: user.data_nascimento.value
+               nome: user.nome.value,
+               aniversario: user.aniversario.value,
+               telefone: user.telefone.value,
+               email: user.email.value,
+               genero: user.genero.value,
+               rg: user.rg.value,
+               cep: user.cep.value,
+               endereco: user.endereco.value,
+               numero_endereco: user.numero_endereco.value,
+               complemento: user.complemento.value
             })
             .then(({ data }) => toast.success(data))
             .catch((err) => toast.error(err.response.data.error))
       } else {
          await axios
             .post('http://localhost:8800', {
-               nome: user.nome.value,
-               email: user.email.value,
-               telefone: user.telefone.value,
                cpf: user.cpf.value,
-               data_nascimento: user.data_nascimento.value
+               nome: user.nome.value,
+               aniversario: user.aniversario.value,
+               telefone: user.telefone.value,
+               email: user.email.value,
+               genero: user.genero.value,
+               rg: user.rg.value,
+               cep: user.cep.value,
+               endereco: user.endereco.value,
+               numero_endereco: user.numero_endereco.value,
+               complemento: user.complemento.value
             })
             .then(({ data }) => toast.success(data))
             .catch((err) => toast.error(err.response.data.error))
       }
-      user.nome.value = ''
-      user.email.value = ''
-      user.telefone.value = ''
-      user.cpf.value = ''
-      user.data_nascimento.value = ''
 
       setOnEdit(null)
       getUsers()
@@ -114,8 +133,13 @@ export default function Form({ getUsers, onEdit, setOnEdit }) {
          </InputArea>
 
          <InputArea>
-            <Label>Email</Label>
-            <Input name="email" type="email" />
+            <Label>CPF</Label>
+            <Input name="cpf" />
+         </InputArea>
+
+         <InputArea>
+            <Label>Aniversário</Label>
+            <Input type="date" name="aniversario" />
          </InputArea>
 
          <InputArea>
@@ -124,13 +148,38 @@ export default function Form({ getUsers, onEdit, setOnEdit }) {
          </InputArea>
 
          <InputArea>
-            <Label>CPF</Label>
-            <Input name="cpf" />
+            <Label>Email</Label>
+            <Input name="email" />
          </InputArea>
 
          <InputArea>
-            <Label>Data de Nascimento</Label>
-            <Input name="data_nascimento" type="date" />
+            <Label>Gênero</Label>
+            <Input name="genero" />
+         </InputArea>
+
+         <InputArea>
+            <Label>RG</Label>
+            <Input name="rg" />
+         </InputArea>
+
+         <InputArea>
+            <Label>CEP</Label>
+            <Input name="cep" />
+         </InputArea>
+
+         <InputArea>
+            <Label>Endereço</Label>
+            <Input name="endereco" />
+         </InputArea>
+
+         <InputArea>
+            <Label>Número</Label>
+            <Input name="numero_endereco" />
+         </InputArea>
+
+         <InputArea>
+            <Label>Complemento</Label>
+            <Input name="complemento" />
          </InputArea>
 
          <Button type="submit">SALVAR</Button>

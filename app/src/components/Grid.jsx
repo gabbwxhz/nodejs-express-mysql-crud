@@ -6,35 +6,23 @@ import { toast } from 'react-toastify'
 
 import { FaEdit, FaTrash } from 'react-icons/fa'
 
-const Table = styled.table`
-   width: 100%;
+const List = styled.ul`
+   display: flex;
    background-color: #fff;
    padding: 20px;
    box-shadow: 0px 0px 5px #ccc;
    border-radius: 5px;
-   margin: 20px auto;
+   gap: 50px;
 `
 
-const Thead = styled.thead``
-
-const Tbody = styled.tbody``
-
-const Tr = styled.tr``
-
-const Td = styled.td`
+const ListItem = styled.li`
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
    padding-top: 15px;
-   text-align: ${(props) => (props.alignCenter ? 'center' : 'start')};
-   width: ${(props) => (props.width ? props.width : 'auto')};
-   padding-left: ${(props) => (props.paddingleft ? props.paddingleft : '0')};
 `
 
-const Th = styled.th`
-   text-align: start;
-   border-bottom: inset;
-   padding-bottom: 5px;
-`
-
-export default function Grid({ users, setUsers, setOnEdit }) {
+export default function UsersList({ users, setUsers, setOnEdit }) {
    const formatedDate = (date) => {
       return new Date(date).toLocaleDateString('pt-br')
    }
@@ -43,11 +31,11 @@ export default function Grid({ users, setUsers, setOnEdit }) {
       setOnEdit(item)
    }
 
-   const handleDelete = async (id) => {
+   const handleDelete = async (cpf) => {
       await axios
-         .delete('http://localhost:8800/' + id)
+         .delete('http://localhost:8800/' + cpf)
          .then(({ data }) => {
-            const newArray = users.filter((user) => user.id != id)
+            const newArray = users.filter((user) => user.cpf != cpf)
 
             setUsers(newArray)
             toast.success(data)
@@ -58,36 +46,25 @@ export default function Grid({ users, setUsers, setOnEdit }) {
    }
 
    return (
-      <Table>
-         <Thead>
-            <Tr>
-               <Th>Nome</Th>
-               <Th>Email</Th>
-               <Th>Telefone</Th>
-               <Th>CPF</Th>
-               <Th>Data de Nascimento</Th>
-               <Th></Th>
-               <Th></Th>
-            </Tr>
-         </Thead>
-         <Tbody>
-            {console.log(users)}
-            {users.map((item, i) => (
-               <Tr key={i}>
-                  <Td width="30%">{item.nome}</Td>
-                  <Td width="30%">{item.email}</Td>
-                  <Td width="22%">{item.telefone}</Td>
-                  <Td width="30%">{item.cpf}</Td>
-                  <Td width="30%">{formatedDate(item.data_nascimento)}</Td>
-                  <Td paddingleft="20px" align="center" width="5%">
-                     <FaEdit cursor="pointer" onClick={() => handleEdit(item)} />
-                  </Td>
-                  <Td paddingleft="13px" align="center" width="5%">
-                     <FaTrash cursor="pointer" onClick={() => handleDelete(item.id)} />
-                  </Td>
-               </Tr>
-            ))}
-         </Tbody>
-      </Table>
+      <List>
+         {users.map((item, i) => (
+            <ListItem key={i}>
+               <span>NOME: {item.nome}</span>
+               <span>CPF: {item.cpf}</span>
+               <span>ANIVERSÁRIO: {formatedDate(item.aniversario)}</span>
+               <span>TELEFONE: {item.telefone}</span>
+               <span>GENERO: {item.genero}</span>
+               <span>RG: {item.rg}</span>
+               <span>CEP: {item.cep}</span>
+               <span>ENDEREÇO: {item.endereco}</span>
+               <span>NUMERO: {item.numero_endereco}</span>
+               <span>COMPLEMENTO: {item.complemento}</span>
+               <div style={{ display: 'flex', gap: '20px', marginTop: '10px' }}>
+                  <FaEdit cursor="pointer" onClick={() => handleEdit(item)} />
+                  <FaTrash cursor="pointer" onClick={() => handleDelete(item.cpf)} />
+               </div>
+            </ListItem>
+         ))}
+      </List>
    )
 }
