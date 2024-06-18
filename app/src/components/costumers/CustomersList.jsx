@@ -33,7 +33,7 @@ export default function CustomersList({ users, setUsers, setOnEdit }) {
 
    const handleDelete = async (cpf) => {
       await axios
-         .delete('http://localhost:8800/' + cpf)
+         .delete('http://localhost:8800/customers/' + cpf)
          .then(({ data }) => {
             const newArray = users.filter((user) => user.cpf != cpf)
 

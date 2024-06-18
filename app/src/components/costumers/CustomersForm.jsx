@@ -87,7 +87,7 @@ export default function CustomersForm({ getUsers, onEdit, setOnEdit }) {
 
       if (onEdit) {
          await axios
-            .put('http://localhost:8800/' + onEdit.cpf, {
+            .put('http://localhost:8800//customers/' + onEdit.cpf, {
                cpf: user.cpf.value,
                nome: user.nome.value,
                aniversario: user.aniversario.value,
@@ -104,7 +104,7 @@ export default function CustomersForm({ getUsers, onEdit, setOnEdit }) {
             .catch((err) => toast.error(err.response.data.error))
       } else {
          await axios
-            .post('http://localhost:8800', {
+            .post('http://localhost:8800/customers', {
                cpf: user.cpf.value,
                nome: user.nome.value,
                aniversario: user.aniversario.value,
