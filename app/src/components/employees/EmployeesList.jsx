@@ -33,7 +33,7 @@ export default function EmployeesList({ users, setUsers, setOnEdit }) {
 
    const handleDelete = async (cpf) => {
       await axios
-         .delete('http://localhost:8800/' + cpf)
+         .delete('http://localhost:8800/employees/' + cpf)
          .then(({ data }) => {
             const newArray = users.filter((user) => user.cpf != cpf)
 
@@ -50,15 +50,11 @@ export default function EmployeesList({ users, setUsers, setOnEdit }) {
          {users.map((item, i) => (
             <ListItem key={i}>
                <span>NOME: {item.nome}</span>
+               <span>NOME NA AGENDA: {item.nome_agenda}</span>
                <span>CPF: {item.cpf}</span>
-               <span>ANIVERSÁRIO: {formatedDate(item.aniversario)}</span>
-               <span>TELEFONE: {item.telefone}</span>
-               <span>GENERO: {item.genero}</span>
+               <span>DATA DE NASCIMENTO: {formatedDate(item.data_nascimento)}</span>
                <span>RG: {item.rg}</span>
-               <span>CEP: {item.cep}</span>
-               <span>ENDEREÇO: {item.endereco}</span>
-               <span>NUMERO: {item.numero_endereco}</span>
-               <span>COMPLEMENTO: {item.complemento}</span>
+               <span>CARGO: {item.cargo}</span>
                <div style={{ display: 'flex', gap: '20px', marginTop: '10px' }}>
                   <FaEdit cursor="pointer" onClick={() => handleEdit(item)} />
                   <FaTrash cursor="pointer" onClick={() => handleDelete(item.cpf)} />

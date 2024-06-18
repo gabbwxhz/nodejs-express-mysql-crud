@@ -53,15 +53,10 @@ export default function EmployeesForm({ getUsers, onEdit, setOnEdit }) {
 
          ;(user.cpf.value = onEdit.cpf),
             (user.nome.value = onEdit.nome),
-            (user.aniversario.value = onEdit.aniversario),
-            (user.telefone.value = onEdit.telefone),
-            (user.email.value = onEdit.email),
-            (user.genero.value = onEdit.genero),
+            (user.nome_agenda.value = onEdit.nome_agenda),
+            (user.data_nascimento.value = onEdit.data_nascimento),
             (user.rg.value = onEdit.rg),
-            (user.cep.value = onEdit.cep),
-            (user.endereco.value = onEdit.endereco),
-            (user.numero_endereco.value = onEdit.numero_endereco),
-            (user.complemento.value = onEdit.complemento)
+            (user.cargo.value = onEdit.cargo)
       }
    }, [onEdit])
 
@@ -73,49 +68,34 @@ export default function EmployeesForm({ getUsers, onEdit, setOnEdit }) {
       if (
          !user.cpf.value ||
          !user.nome.value ||
-         !user.aniversario.value ||
-         !user.telefone.value ||
-         !user.email.value ||
-         !user.genero.value ||
+         !user.nome_agenda.value ||
+         !user.data_nascimento.value ||
          !user.rg.value ||
-         !user.cep.value ||
-         !user.endereco.value ||
-         !user.numero_endereco.value ||
-         !user.complemento.value
+         !user.cargo.value
       )
          return toast.warn('preencha todos os campos!')
 
       if (onEdit) {
          await axios
-            .put('http://localhost:8800/' + onEdit.cpf, {
+            .put('http://localhost:8800/employees/' + onEdit.cpf, {
                cpf: user.cpf.value,
                nome: user.nome.value,
-               aniversario: user.aniversario.value,
-               telefone: user.telefone.value,
-               email: user.email.value,
-               genero: user.genero.value,
+               nome_agenda: user.nome_agenda.value,
+               data_nascimento: user.data_nascimento.value,
                rg: user.rg.value,
-               cep: user.cep.value,
-               endereco: user.endereco.value,
-               numero_endereco: user.numero_endereco.value,
-               complemento: user.complemento.value
+               cargo: user.cargo.value
             })
             .then(({ data }) => toast.success(data))
             .catch((err) => toast.error(err.response.data.error))
       } else {
          await axios
-            .post('http://localhost:8800', {
+            .post('http://localhost:8800/employees', {
                cpf: user.cpf.value,
                nome: user.nome.value,
-               aniversario: user.aniversario.value,
-               telefone: user.telefone.value,
-               email: user.email.value,
-               genero: user.genero.value,
+               nome_agenda: user.nome_agenda.value,
+               data_nascimento: user.data_nascimento.value,
                rg: user.rg.value,
-               cep: user.cep.value,
-               endereco: user.endereco.value,
-               numero_endereco: user.numero_endereco.value,
-               complemento: user.complemento.value
+               cargo: user.cargo.value
             })
             .then(({ data }) => toast.success(data))
             .catch((err) => toast.error(err.response.data.error))
@@ -128,13 +108,13 @@ export default function EmployeesForm({ getUsers, onEdit, setOnEdit }) {
    return (
       <FormContainer ref={ref} onSubmit={handleSubmit}>
          <InputArea>
-            <Label>Nome conf. documento</Label>
-            <Input name="nome_documento" />
+            <Label>Nome</Label>
+            <Input name="nome" />
          </InputArea>
 
          <InputArea>
-            <Label>Nome social</Label>
-            <Input name="nome_social" />
+            <Label>Nome agenda</Label>
+            <Input name="nome_agenda" />
          </InputArea>
 
          <InputArea>
