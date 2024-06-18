@@ -7,8 +7,8 @@ import axios from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
-import Form from '../../src/components/Form'
-import Grid from '../../src/components/Grid'
+import EmployeesForm from '../components/employees/EmployeesForm'
+import EmployeesList from '../components/employees/EmployeesList'
 
 const Container = styled.div`
    width: 1000px;
@@ -21,7 +21,7 @@ const Container = styled.div`
 
 const Title = styled.h1``
 
-export default function Costumers() {
+export default function Employees() {
    const [users, setUsers] = useState([])
    const [onEdit, setOnEdit] = useState(null)
 
@@ -41,9 +41,9 @@ export default function Costumers() {
    return (
       <>
          <Container>
-            <Title>TESTE CLIENTES</Title>
-            <Form onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers} />
-            <Grid users={users} setUsers={setUsers} setOnEdit={setOnEdit} />
+            <Title>TESTE FUNCIONÁRIAS</Title>
+            <EmployeesForm onEdit={onEdit} setOnEdit={setOnEdit} getUsers={getUsers} />
+            <EmployeesList users={users} setUsers={setUsers} setOnEdit={setOnEdit} />
          </Container>
          <ToastContainer autoClose={3000} position="bottom-left" />
       </>
