@@ -31,12 +31,12 @@ export const addCostumer = (req, res) => {
    db.query(q, [values], (err) => {
       if (err) {
          if (err.code === 'ER_DUP_ENTRY') {
-            return res.status(400).json({ error: 'usuario ja cadastrado!' })
+            return res.status(400).json({ error: 'cliente ja cadastrado!' })
          }
          return res.json(err)
       }
 
-      return res.status(200).json('usuario criado com sucesso!')
+      return res.status(200).json('cliente criado com sucesso!')
    })
 }
 
@@ -62,7 +62,7 @@ export const updateCostumer = (req, res) => {
    db.query(q, [...values, req.params.cpf], (err) => {
       if (err) return res.json(err)
 
-      return res.status(200).json('usuario atualizado com sucesso!')
+      return res.status(200).json('cliente atualizado com sucesso!')
    })
 }
 
@@ -72,6 +72,6 @@ export const deleteCostumer = (req, res) => {
    db.query(q, [req.params.cpf], (err) => {
       if (err) res.json(err)
 
-      return res.status(200).json('usuario deletado com sucesso!')
+      return res.status(200).json('cliente deletado com sucesso!')
    })
 }
