@@ -42,7 +42,7 @@ export const addCostumer = (req, res) => {
 
 export const updateCostumer = (req, res) => {
    const q =
-      'UPDATE clientes SET `nome` = ?, `aniversario` = ?, `email` = ?, `telefone` = ?, `genero` = ?, `rg` = ?, `cep` = ?, `endereco` = ?, `numero_endereco` = ?, `complemento` = ?  WHERE `cpf` = ?'
+      'UPDATE clientes SET `nome` = ?, `aniversario` = ?,`telefone` = ?, `email` = ?,  `genero` = ?, `rg` = ?, `cep` = ?, `endereco` = ?, `numero_endereco` = ?, `complemento` = ?  WHERE `cpf` = ?'
 
    const values = [
       req.body.nome,

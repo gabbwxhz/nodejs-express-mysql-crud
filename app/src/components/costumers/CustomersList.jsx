@@ -53,6 +53,7 @@ export default function CustomersList({ users, setUsers, setOnEdit }) {
                <span>CPF: {item.cpf}</span>
                <span>ANIVERSÁRIO: {formatedDate(item.aniversario)}</span>
                <span>TELEFONE: {item.telefone}</span>
+               <span>EMAIL: {item.email}</span>
                <span>GENERO: {item.genero}</span>
                <span>RG: {item.rg}</span>
                <span>CEP: {item.cep}</span>
