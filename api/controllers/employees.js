@@ -1,7 +1,7 @@
 import { db } from '../db.js'
 
 export const getEmployee = (_, res) => {
-   const q = 'SELECT * from funcionarias'
+   const q = 'SELECT * FROM funcionarias'
 
    db.query(q, (err, data) => {
       if (err) return res.json(err)
