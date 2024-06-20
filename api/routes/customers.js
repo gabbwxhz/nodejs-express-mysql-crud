@@ -7,7 +7,7 @@ import {
    deleteCostumer
 } from '../controllers/customers.js'
 
-const router = express.Router()
+const router = express()
 
 router.get('/', getCostumer)
 
